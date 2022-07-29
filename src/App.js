@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
-
+import styled from 'styled-components';
+import React from 'react';
+import {useState} from 'react';
+import ProgressBar from './componenets/ProgressBar';
+import Clock from './componenets/Clock';
+export const PomoContext = React.createContext();
 function App() {
+  const [play,setPlay] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [time, setTime] = useState(25*60);
+  const [cycle, setCycle] = useState(3);
+  const [rest, setRest] = useState(true);
+  const [initial,setInitial] = useState(25*60);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PomoContext.Provider value={{play,setPlay,progress,setProgress,time,setTime,cycle,setCycle,rest,setRest,initial,setInitial}}>
+    <Title>Pomodoro</Title>
+      <ProgressBar/>
+      <Clock/>
+    </PomoContext.Provider>
   );
 }
+const Title = styled.h1`
+text-transform: uppercase;
+text-align: center;
+`;
 
 export default App;
